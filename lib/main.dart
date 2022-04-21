@@ -66,10 +66,10 @@ class MyApp extends StatelessWidget {
                 colorScheme:
                     ColorScheme.fromSwatch().copyWith(secondary: Colors.white)),
             darkTheme: ThemeData(
-                primaryColor: const Color.fromARGB(255, 134, 48, 177),
+                primaryColor: const Color.fromARGB(221, 121, 121, 121),
                 canvasColor: Colors.white,
                 colorScheme: ColorScheme.fromSwatch().copyWith(
-                    secondary: const Color.fromARGB(255, 22, 31, 87))),
+                    secondary: const Color.fromARGB(221, 78, 78, 78))),
             themeMode:
                 AppCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
             home: AnimatedSplashScreen(
@@ -80,8 +80,8 @@ class MyApp extends StatelessWidget {
               splash: const SplashScreen(),
               splashIconSize: 2000,
               backgroundColor: AppCubit.get(context).isDark
-                  ? const Color.fromARGB(255, 23, 21, 81)
-                  : Colors.white,
+                  ? const Color.fromARGB(221, 121, 121, 121)
+                  :  const Color.fromARGB(221, 78, 78, 78),
             ),
           );
         },

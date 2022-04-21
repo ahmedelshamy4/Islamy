@@ -1,5 +1,6 @@
 import 'package:adhan/adhan.dart';
 import 'package:flutter/animation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/MainCubit/app_cubit_states.dart';
 import 'package:quran_app/helper/cach_helper.dart';
@@ -18,6 +19,13 @@ class AppCubit extends Cubit<AppCubitStates> {
     cacheHelper
         .saveData(key: 'isDark', value: isDark)
         .then((value) => {emit(AppChangeThemeState())});
+  }
+
+  final Scrollcontroller = ScrollController();
+  GoToLastAyaIndex() {
+    double offset = cacheHelper.getdata(key: 'lastverss');
+    Scrollcontroller.animateTo(offset,
+        duration: const Duration(seconds: 1), curve: Curves.ease);
   }
 
   bool IsArabic = false;

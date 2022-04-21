@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:quran/quran.dart' as quran;
 import 'package:quran_app/MainCubit/app_cubit.dart';
+import 'package:quran_app/screen/Quran/reading_screen.dart';
+import 'package:quran_app/screen/Quran/reading_screen_basmala.dart';
 
 class verssModel {
   String verss;
@@ -14,13 +16,24 @@ Widget surahItem(context, index) {
   return InkWell(
     onTap: () {
       for (int i = 1; i < quran.getVerseCount(surahnum) + 1; i++) {
-        String verss = quran.getVerse(surahnum, 1);
-        verssModel v = verssModel(verss, 1);
+        String verss = quran.getVerse(surahnum, i);
+        verssModel v = verssModel(verss, i);
         list.add(v);
       }
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => surahnum == 9 || surahnum == 1
+                ? ReadingScreenNoBasmala(list: list, lastSura: false)
+                : ReadingScreen(
+                    list: list,
+                    lastSura: false,
+                  )),
+      );
       AppCubit.get(context).currentSurahNumber = surahnum;
       AppCubit.get(context).currentSurahName =
           quran.getSurahNameArabic(surahnum);
+
       AppCubit.get(context).saveDataCache(
           context, AppCubit.get(context).currentSurahName, "suraName");
       AppCubit.get(context)
@@ -119,6 +132,136 @@ Widget JuzaItem(context, index) {
   List<verssModel> list = [];
   int surahnum = index + 1;
   return InkWell(
-    onTap: () {},
+    onTap: () {
+      for (int i = 1; i < quran.getVerseCount(surahnum) + 1; i++) {
+        String verss = quran.getVerse(surahnum, i);
+        verssModel v = verssModel(verss, i);
+        list.add(v);
+      }
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => surahnum == 9 || surahnum == 1
+                  ? ReadingScreenNoBasmala(
+                      list: list,
+                      lastSura: false,
+                    )
+                  : ReadingScreen(
+                      list: list,
+                      lastSura: false,
+                    )));
+      AppCubit.get(context).currentSurahNumber = surahnum;
+      AppCubit.get(context).currentSurahName =
+          quran.getSurahNameArabic(surahnum);
+
+      AppCubit.get(context).saveDataCache(
+          context, AppCubit.get(context).currentSurahName, 'suraName');
+      AppCubit.get(context)
+          .saveInt(context, AppCubit.get(context).currentSurahNumber, 'suraID');
+    },
+    child: SizedBox(
+      width: double.infinity,
+      height: MediaQuery.of(context).size.height * 0.125,
+      child: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                ImageIcon(
+                  AssetImage('assets/images/star.png'),
+                  color: Theme.of(context).primaryColor,
+                  size: 40,
+                ),
+                Text(
+                  '${index + 1}',
+                  style: TextStyle(
+                    fontFamily: 'myFont',
+                    fontWeight: FontWeight.w900,
+                    color: Theme.of(context).canvasColor,
+                    fontSize: 12,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            width: MediaQuery.of(context).size.width * 0.47,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.04,
+                  child: Text(
+                    'الجزء ${juza[index]}',
+                    style: TextStyle(
+                      fontFamily: 'myFont',
+                      fontSize: AppCubit.get(context).IsArabic ? 13 : 20,
+                      fontWeight: FontWeight.bold,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    textAlign: AppCubit.get(context).IsArabic
+                        ? TextAlign.left
+                        : TextAlign.right,
+                  ),
+                ),
+                const SizedBox(height: 3),
+              ],
+            ),
+          ),
+          Center(
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.3,
+              child: Text(
+                'الجزء ${juza[index]}',
+                style: TextStyle(
+                    fontFamily: 'myFont',
+                    fontSize: AppCubit.get(context).IsArabic ? 13 : 20,
+                    fontWeight: FontWeight.bold,
+                    color: Theme.of(context).primaryColor),
+                textAlign: AppCubit.get(context).IsArabic
+                    ? TextAlign.left
+                    : TextAlign.right,
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
   );
 }
+
+List juza = [
+  ' الاول',
+  ' الثاني ',
+  'الثالث ',
+  'الرابع  ',
+  'الخامس ',
+  'السادس',
+  'السابع ',
+  'الثامن ',
+  'التاسع ',
+  'العاشر ',
+  'الحادي عشر ',
+  'الاثن عشر ',
+  'الثالث عشر',
+  'الرابع عشر ',
+  'الخامس عشر ',
+  'السادس عشر ',
+  'السابع عشر ',
+  'الثامن عشر ',
+  'التاسع عشر ',
+  'العشرون',
+  'الواحد و اعلشرون ',
+  'الثاني و العشرون ',
+  'الثالث و العشرون ',
+  'الرابع و العشرون ',
+  'الخامس و العشرون ',
+  'السادس و العشرون ',
+  'السابع و العسرون ',
+  'الثامن و العشرون ',
+  'التاسع و العشرون ',
+  'الثلاين'
+];

@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Scaffold(
                   floatingActionButton: FloatingActionButton(
                     onPressed: AppCubit.get(context).changeListPattern,
-                    child: Icon(Icons.wifi_protected_setup_outlined),
+                    child: const Icon(Icons.wifi_protected_setup_outlined),
                   ),
                   backgroundColor: AppCubit.get(context).isDark
                       ? Colors.transparent
@@ -91,12 +91,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     title: Text(
                       titles[bottomNavBarCubit.get(context).currentIndex],
                       style: TextStyle(
-                          color: AppCubit.get(context).isDark
-                              ? Colors.white
-                              : Colors.black,
-                          fontSize: 25,
-                          fontFamily: 'myFont',
-                          fontWeight: FontWeight.bold),
+                        color: AppCubit.get(context).isDark
+                            ? Colors.white
+                            : Colors.black,
+                        fontSize: 25,
+                        fontFamily: 'myFont',
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   body: bottomNavBarCubit
@@ -104,16 +105,19 @@ class _HomeScreenState extends State<HomeScreen> {
                       .screens[bottomNavBarCubit.get(context).currentIndex],
                   bottomNavigationBar: BottomNavigationBar(
                     currentIndex: bottomNavBarCubit.get(context).currentIndex,
-                    onTap: (i){
+                    onTap: (i) {
                       bottomNavBarCubit.get(context).checkIndex(i);
                     },
                     type: BottomNavigationBarType.fixed,
-                    backgroundColor: AppCubit.get(context).isDark?
-                    const Color.fromARGB(255, 22, 31, 87):Colors.white,
-                    unselectedIconTheme: IconThemeData(color:
-                    AppCubit.get(context).isDark?
-                    Colors.white:Colors.black),
-                    selectedIconTheme: const IconThemeData(color: Colors.purple),
+                    backgroundColor: AppCubit.get(context).isDark
+                        ? const Color.fromARGB(255, 22, 31, 87)
+                        : Colors.white,
+                    unselectedIconTheme: IconThemeData(
+                        color: AppCubit.get(context).isDark
+                            ? Colors.white
+                            : Colors.black),
+                    selectedIconTheme:
+                        const IconThemeData(color: Colors.purple),
                     iconSize: 500,
                     items: [
                       BottomNavigationBarItem(
