@@ -11,7 +11,6 @@ import '../../MainCubit/app_cubit_states.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QuranScreen extends StatelessWidget {
-  const QuranScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -13,10 +13,10 @@ class bottomNavBarCubit extends Cubit<bottomNavBarStates> {
   static bottomNavBarCubit get(context) => BlocProvider.of(context);
   int currentIndex = 0;
   List<Widget> screens = [
-    const QuranScreen(),
-    const SalaTimesScreen(),
-    const QiblaScreen(),
-    const SebhaScreen(),
+    QuranScreen(),
+    SalaTimesScreen(),
+    QiblaScreen(),
+    SebhaScreen(),
   ];
   void checkIndex(int i) {
     currentIndex = i;

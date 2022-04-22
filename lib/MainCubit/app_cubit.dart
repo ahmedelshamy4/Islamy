@@ -49,6 +49,11 @@ class AppCubit extends Cubit<AppCubitStates> {
 
   int currentSurahNumber = 1;
   String currentSurahName = '';
+  var currentAngle = 0.0;
+  double taspeh = 0.0;
+  String tspehWord = 'سبحان الله';
+  int duration = 0;
+
 
   void saveDataCache(context, String value, String key) {
     cacheHelper.saveData(key: key, value: value);
@@ -59,10 +64,11 @@ class AppCubit extends Cubit<AppCubitStates> {
     cacheHelper.saveData(key: key, value: value);
     emit(saveDataState());
   }
-
+  var locationLAT = 30.21035;
+  var locationLON = 31.36812;
   late PrayerTimes rayerTimes;
   void c() {
-    final myCoordinates = Coordinates(30.033333, 31.233334);
+    final myCoordinates = Coordinates(locationLAT, locationLON);
     final params = CalculationMethod.egyptian.getParameters();
     params.madhab = Madhab.hanafi;
     final prayerTimes = PrayerTimes.today(myCoordinates, params);
