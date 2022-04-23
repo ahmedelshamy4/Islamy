@@ -21,23 +21,23 @@ class AppCubit extends Cubit<AppCubitStates> {
         .then((value) => {emit(AppChangeThemeState())});
   }
 
-  final Scrollcontroller = ScrollController();
-  GoToLastAyaIndex() {
+  final scrollController = ScrollController();
+  goToLastAyaIndex() {
     double offset = cacheHelper.getdata(key: 'lastverss');
-    Scrollcontroller.animateTo(offset,
+    scrollController.animateTo(offset,
         duration: const Duration(seconds: 1), curve: Curves.ease);
   }
 
-  bool IsArabic = false;
-  void ChangeLocale(bool? fromCache) {
+  bool isArabic = false;
+  void changeLocale(bool? fromCache) {
     if (fromCache != null) {
       emit(ChangeL10n());
-      IsArabic = fromCache;
+      isArabic = fromCache;
     }
-    IsArabic = !IsArabic;
+    isArabic = !isArabic;
     emit(ChangeL10n());
     cacheHelper
-        .saveData(key: 'ISARBICK', value: IsArabic)
+        .saveData(key: 'ISARBICK', value: isArabic)
         .then((value) => {emit(ChangeL10n())});
   }
 
@@ -49,11 +49,11 @@ class AppCubit extends Cubit<AppCubitStates> {
 
   int currentSurahNumber = 1;
   String currentSurahName = '';
+
   var currentAngle = 0.0;
   double taspeh = 0.0;
-  String tspehWord = 'سبحان الله';
+  String taspehWord = 'سبحان الله';
   int duration = 0;
-
 
   void saveDataCache(context, String value, String key) {
     cacheHelper.saveData(key: key, value: value);
@@ -64,14 +64,22 @@ class AppCubit extends Cubit<AppCubitStates> {
     cacheHelper.saveData(key: key, value: value);
     emit(saveDataState());
   }
+
   var locationLAT = 30.21035;
   var locationLON = 31.36812;
-  late PrayerTimes rayerTimes;
+
+  // void getLocationLat() async {
+  //   var x = await Geolocator.getCurrentPosition(
+  //     desiredAccuracy: LocationAccuracy.best,);
+  //   var lastPosition = await Geolocator.getLastKnownPosition();
+  //   locationLAT =x.altitude;
+  //   locationLON = x.longitude;
+  // }
+  late PrayerTimes prayerTimes;
   void c() {
     final myCoordinates = Coordinates(locationLAT, locationLON);
     final params = CalculationMethod.egyptian.getParameters();
     params.madhab = Madhab.hanafi;
-    final prayerTimes = PrayerTimes.today(myCoordinates, params);
-    rayerTimes = PrayerTimes.today(myCoordinates, params);
+    prayerTimes = PrayerTimes.today(myCoordinates, params);
   }
 }

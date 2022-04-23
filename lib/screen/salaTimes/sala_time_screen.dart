@@ -3,18 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:quran_app/MainCubit/app_cubit_states.dart';
-import 'package:quran_app/screen/Sala/salaItem.dart';
+import 'package:quran_app/screen/SalaTimes/salaItem.dart';
 
 import '../../MainCubit/app_cubit.dart';
 
 class SalaTimesScreen extends StatelessWidget {
-
-
   @override
   Widget build(BuildContext context) {
     final myCoordinates = Coordinates(
-        AppCubit.get(context).rayerTimes.coordinates.latitude,
-        AppCubit.get(context).rayerTimes.coordinates.longitude);
+      AppCubit.get(context).prayerTimes.coordinates.latitude,
+      AppCubit.get(context).prayerTimes.coordinates.longitude,
+    );
     final params = CalculationMethod.egyptian.getParameters();
     params.madhab = Madhab.hanafi;
     final prayerTimes = PrayerTimes.today(myCoordinates, params);
@@ -23,6 +22,7 @@ class SalaTimesScreen extends StatelessWidget {
     List NextSala = nextSala.split('.');
     List asr = Asr.split(':');
     int asrTime = int.parse(asr[0]);
+
     return BlocConsumer<AppCubit, AppCubitStates>(
       builder: (context, state) {
         return SingleChildScrollView(
@@ -64,7 +64,8 @@ class SalaTimesScreen extends StatelessWidget {
                           width: MediaQuery.of(context).size.width * 0.8,
                           child: Center(
                             child: Text(
-                              '${AppCubit.get(context).IsArabic ? 'الصلاه القادمة' : "Next pray"} : ${NextSala[1] == 'none' ? "fajr" : NextSala[1]}',
+                              '${AppCubit.get(context).isArabic ? 'الصلاه القادمة' : "Next pray"} : '
+                              '${NextSala[1] == 'none' ? "fajr" : NextSala[1]}',
                               overflow: TextOverflow.ellipsis,
                               style: TextStyle(
                                 color: Theme.of(context).canvasColor,
@@ -87,45 +88,45 @@ class SalaTimesScreen extends StatelessWidget {
                     width: double.infinity,
                   ),
                   salaItem(
-                    context,
-                    'Fajr',
-                    DateFormat.jm().format(prayerTimes.fajr),
-                    'الفجر',
+                    context: context,
+                    Enstring: 'Fajr',
+                    Tstring: DateFormat.jm().format(prayerTimes.fajr),
+                    Arstring: 'الفجر',
                   ),
                   const SizedBox(height: 19),
                   salaItem(
-                    context,
-                    'Sunrise',
-                    DateFormat.jm().format(prayerTimes.sunrise),
-                    'الشروق',
+                    context: context,
+                    Enstring: 'Sunrise',
+                    Tstring: DateFormat.jm().format(prayerTimes.sunrise),
+                    Arstring: 'الشروق',
                   ),
                   const SizedBox(height: 19),
                   salaItem(
-                    context,
-                    'Zuhr',
-                    DateFormat.jm().format(prayerTimes.dhuhr),
-                    'الظهر',
+                    context: context,
+                    Enstring: 'Zuhr',
+                    Tstring: DateFormat.jm().format(prayerTimes.dhuhr),
+                    Arstring: 'الظهر',
                   ),
                   const SizedBox(height: 19),
                   salaItem(
-                    context,
-                    'Asr',
-                    DateFormat.jm().format(prayerTimes.asr),
-                    'العصر',
+                    context: context,
+                    Enstring: 'Asr',
+                    Tstring: '${asrTime - 1}:${asr[1]}',
+                    Arstring: 'العصر',
                   ),
                   const SizedBox(height: 19),
                   salaItem(
-                    context,
-                    'Maghrib',
-                    DateFormat.jm().format(prayerTimes.maghrib),
-                    'المغرب',
+                    context: context,
+                    Enstring: 'Maghrib',
+                    Tstring: DateFormat.jm().format(prayerTimes.maghrib),
+                    Arstring: 'المغرب',
                   ),
                   const SizedBox(height: 19),
                   salaItem(
-                    context,
-                    'Isha',
-                    DateFormat.jm().format(prayerTimes.isha),
-                    'العشاء',
+                    context: context,
+                    Enstring: 'Isha',
+                    Tstring: DateFormat.jm().format(prayerTimes.isha),
+                    Arstring: 'العشاء',
                   ),
                 ],
               )

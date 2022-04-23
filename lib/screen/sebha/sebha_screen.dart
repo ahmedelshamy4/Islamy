@@ -3,8 +3,6 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import '../../MainCubit/app_cubit.dart';
 
 class SebhaScreen extends StatefulWidget {
-  const SebhaScreen({Key? key}) : super(key: key);
-
   @override
   State<SebhaScreen> createState() => _SebhaScreenState();
 }
@@ -45,35 +43,35 @@ class _SebhaScreenState extends State<SebhaScreen> {
                       if (cubit.duration == 0) {
                         setState(() {
                           cubit.taspeh = 0.0;
-                          cubit.tspehWord = 'الحمد لله ';
+                          cubit.taspehWord = 'الحمد لله ';
                           cubit.duration++;
                         });
                       } else if (cubit.duration == 1) {
                         setState(() {
                           cubit.taspeh = 0.0;
-                          cubit.tspehWord = ' الله اكبر';
+                          cubit.taspehWord = ' الله اكبر';
                           cubit.duration++;
                         });
                       } else if (cubit.duration == 2) {
                         setState(() {
                           cubit.taspeh = 0.0;
-                          cubit.tspehWord = 'لا اله الا الله';
+                          cubit.taspehWord = 'لا اله الا الله';
                           cubit.duration++;
                         });
                       } else if (cubit.duration == 3) {
                         setState(() {
                           cubit.taspeh = 0.0;
-                          cubit.tspehWord = 'سبحان الله';
+                          cubit.taspehWord = 'سبحان الله';
                           cubit.duration = 0;
                         });
                       }
                     },
                     child: Text(
-                      AppCubit.get(context).tspehWord.toUpperCase(),
+                      AppCubit.get(context).taspehWord.toUpperCase(),
                       textAlign: TextAlign.center,
                       style: TextStyle(
                           color: Theme.of(context).canvasColor,
-                          fontSize: AppCubit.get(context).IsArabic ? 30 : 20,
+                          fontSize: AppCubit.get(context).isArabic ? 30 : 20,
                           fontFamily: 'myFont',
                           fontWeight: FontWeight.bold),
                     ),
@@ -144,7 +142,7 @@ class _SebhaScreenState extends State<SebhaScreen> {
                   style: TextStyle(
                     color: Colors.white.withOpacity(0.9),
                     letterSpacing: 5,
-                    fontSize: AppCubit.get(context).IsArabic ? 25 : 20,
+                    fontSize: AppCubit.get(context).isArabic ? 25 : 20,
                     fontFamily: 'myFont',
                   ),
                 )),
@@ -158,11 +156,12 @@ class _SebhaScreenState extends State<SebhaScreen> {
     setState(() {
       AppCubit.get(context).taspeh++;
       AppCubit.get(context).currentAngle += 33;
+
       if (AppCubit.get(context).taspeh == 33 &&
           AppCubit.get(context).duration == 0) {
         setState(() {
           AppCubit.get(context).taspeh = 0.0;
-          AppCubit.get(context).tspehWord = 'الحمد لله';
+          AppCubit.get(context).taspehWord = 'الحمد لله';
           AppCubit.get(context).duration++;
         });
       }
@@ -170,7 +169,7 @@ class _SebhaScreenState extends State<SebhaScreen> {
           AppCubit.get(context).duration == 1) {
         setState(() {
           AppCubit.get(context).taspeh = 0.0;
-          AppCubit.get(context).tspehWord = 'لا إله إلا الله';
+          AppCubit.get(context).taspehWord = 'لا إله إلا الله';
           AppCubit.get(context).duration++;
         });
       }
@@ -178,7 +177,7 @@ class _SebhaScreenState extends State<SebhaScreen> {
           AppCubit.get(context).duration == 2) {
         setState(() {
           AppCubit.get(context).taspeh = 0.0;
-          AppCubit.get(context).tspehWord = 'الله أكبر';
+          AppCubit.get(context).taspehWord = 'الله أكبر';
           AppCubit.get(context).duration++;
         });
       }
@@ -186,16 +185,17 @@ class _SebhaScreenState extends State<SebhaScreen> {
           AppCubit.get(context).duration == 3) {
         setState(() {
           AppCubit.get(context).taspeh = 0.0;
-          AppCubit.get(context).tspehWord = 'سبحان الله';
+          AppCubit.get(context).taspehWord = 'سبحان الله';
           AppCubit.get(context).duration = 0;
         });
       }
     });
   }
+
   void reset() {
     setState(() {
       AppCubit.get(context).taspeh = 0;
-      AppCubit.get(context).tspehWord =
+      AppCubit.get(context).taspehWord =
           AppLocalizations.of(context)!.subhanallah.toUpperCase();
       AppCubit.get(context).currentAngle = 0;
       AppCubit.get(context).duration = 0;

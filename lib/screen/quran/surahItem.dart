@@ -4,20 +4,20 @@ import 'package:quran_app/MainCubit/app_cubit.dart';
 import 'package:quran_app/screen/Quran/reading_screen.dart';
 import 'package:quran_app/screen/Quran/reading_screen_basmala.dart';
 
-class verssModel {
+class VerssModel {
   String verss;
   int versCount;
-  verssModel(this.verss, this.versCount);
+  VerssModel(this.verss, this.versCount);
 }
 
 Widget surahItem(context, index) {
-  List<verssModel> list = [];
+  List<VerssModel> list = [];
   int surahnum = index + 1;
   return InkWell(
     onTap: () {
       for (int i = 1; i < quran.getVerseCount(surahnum) + 1; i++) {
         String verss = quran.getVerse(surahnum, i);
-        verssModel v = verssModel(verss, i);
+        VerssModel v = VerssModel(verss, i);
         list.add(v);
       }
       Navigator.push(
@@ -50,7 +50,7 @@ Widget surahItem(context, index) {
               alignment: Alignment.center,
               children: [
                 ImageIcon(
-                  AssetImage('assets/images/star.png'),
+                  const AssetImage('assets/images/star.png'),
                   color: Theme.of(context).primaryColor,
                   size: 40,
                 ),
@@ -75,14 +75,14 @@ Widget surahItem(context, index) {
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.04,
                   child: Text(
-                    AppCubit.get(context).IsArabic
+                    AppCubit.get(context).isArabic
                         ? quran.getSurahNameArabic(surahnum) == 'اللهب'
                             ? 'المسد'
                             : quran.getSurahNameArabic(surahnum)
                         : quran.getSurahName(surahnum).toUpperCase(),
                     style: TextStyle(
                         fontFamily: 'myFont',
-                        fontSize: AppCubit.get(context).IsArabic ? 16 : 18,
+                        fontSize: AppCubit.get(context).isArabic ? 16 : 18,
                         fontWeight: FontWeight.bold,
                         color: Theme.of(context).canvasColor),
                   ),
@@ -106,17 +106,17 @@ Widget surahItem(context, index) {
             child: SizedBox(
               width: MediaQuery.of(context).size.width * 0.3,
               child: Text(
-                AppCubit.get(context).IsArabic
+                AppCubit.get(context).isArabic
                     ? quran.getSurahName(surahnum).toUpperCase()
                     : quran.getSurahNameArabic(surahnum) == 'اللهب'
                         ? 'المسد'
                         : quran.getSurahNameArabic(surahnum),
                 style: TextStyle(
                     fontFamily: 'myFont',
-                    fontSize: AppCubit.get(context).IsArabic ? 13 : 20,
+                    fontSize: AppCubit.get(context).isArabic ? 13 : 20,
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).primaryColor),
-                textAlign: AppCubit.get(context).IsArabic
+                textAlign: AppCubit.get(context).isArabic
                     ? TextAlign.left
                     : TextAlign.right,
               ),
@@ -128,20 +128,20 @@ Widget surahItem(context, index) {
   );
 }
 
-Widget JuzaItem(context, index) {
-  List<verssModel> list = [];
-  int surahnum = index + 1;
+Widget JuzItem(context, index) {
+  List<VerssModel> list = [];
+  int juzNum = index + 1;
   return InkWell(
     onTap: () {
-      for (int i = 1; i < quran.getVerseCount(surahnum) + 1; i++) {
-        String verss = quran.getVerse(surahnum, i);
-        verssModel v = verssModel(verss, i);
+      for (int i = 1; i < quran.getVerseCount(juzNum) + 1; i++) {
+        String verss = quran.getVerse(juzNum, i);
+        VerssModel v = VerssModel(verss, i);
         list.add(v);
       }
       Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) => surahnum == 9 || surahnum == 1
+              builder: (context) => juzNum == 9 || juzNum == 1
                   ? ReadingScreenNoBasmala(
                       list: list,
                       lastSura: false,
@@ -150,9 +150,8 @@ Widget JuzaItem(context, index) {
                       list: list,
                       lastSura: false,
                     )));
-      AppCubit.get(context).currentSurahNumber = surahnum;
-      AppCubit.get(context).currentSurahName =
-          quran.getSurahNameArabic(surahnum);
+      AppCubit.get(context).currentSurahNumber = juzNum;
+      AppCubit.get(context).currentSurahName = quran.getSurahNameArabic(juzNum);
 
       AppCubit.get(context).saveDataCache(
           context, AppCubit.get(context).currentSurahName, 'suraName');
@@ -170,7 +169,7 @@ Widget JuzaItem(context, index) {
               alignment: Alignment.center,
               children: [
                 ImageIcon(
-                  AssetImage('assets/images/star.png'),
+                  const AssetImage('assets/images/star.png'),
                   color: Theme.of(context).primaryColor,
                   size: 40,
                 ),
@@ -198,11 +197,11 @@ Widget JuzaItem(context, index) {
                     'الجزء ${juza[index]}',
                     style: TextStyle(
                       fontFamily: 'myFont',
-                      fontSize: AppCubit.get(context).IsArabic ? 13 : 20,
+                      fontSize: AppCubit.get(context).isArabic ? 13 : 20,
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).primaryColor,
                     ),
-                    textAlign: AppCubit.get(context).IsArabic
+                    textAlign: AppCubit.get(context).isArabic
                         ? TextAlign.left
                         : TextAlign.right,
                   ),
@@ -218,10 +217,10 @@ Widget JuzaItem(context, index) {
                 'الجزء ${juza[index]}',
                 style: TextStyle(
                     fontFamily: 'myFont',
-                    fontSize: AppCubit.get(context).IsArabic ? 13 : 20,
+                    fontSize: AppCubit.get(context).isArabic ? 13 : 20,
                     fontWeight: FontWeight.bold,
                     color: Theme.of(context).primaryColor),
-                textAlign: AppCubit.get(context).IsArabic
+                textAlign: AppCubit.get(context).isArabic
                     ? TextAlign.left
                     : TextAlign.right,
               ),

@@ -12,7 +12,7 @@ class QiblaWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _platformBrightness = Theme.of(context).brightness;
+   // var _platformBrightness = Theme.of(context).brightness;
     return StreamBuilder(
         stream: FlutterQiblah.qiblahStream,
         builder: (context, AsyncSnapshot<QiblahDirection> snapshot) {
@@ -67,7 +67,7 @@ class QiblaWidget extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                     color: Theme.of(context).canvasColor,
-                    fontSize: AppCubit.get(context).IsArabic ? 17 : 16,
+                    fontSize: AppCubit.get(context).isArabic ? 17 : 16,
                     fontFamily: 'myFont'),
               ),
             ],

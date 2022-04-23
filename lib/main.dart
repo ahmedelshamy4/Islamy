@@ -5,7 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/MainCubit/app_cubit_states.dart';
 import 'package:quran_app/helper/cach_helper.dart';
 import 'package:quran_app/screen/Home/home_screen.dart';
-import 'package:quran_app/screen/OnBording/onBording_screen.dart';
+import 'package:quran_app/screen/onBoarding/onBording_screen.dart';
 import 'package:quran_app/screen/splash/splash.dart';
 import 'MainCubit/app_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
     return BlocProvider(
       create: (BuildContext context) => AppCubit()
         ..c()
-        ..ChangeLocale(isarabic)
+        ..changeLocale(isarabic)
         ..changeTheme(isDark),
       child: BlocConsumer<AppCubit, AppCubitStates>(
         builder: (context, state) {
@@ -56,9 +56,9 @@ class MyApp extends StatelessWidget {
             debugShowCheckedModeBanner: false,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             supportedLocales: AppLocalizations.supportedLocales,
-            locale: AppCubit.get(context).IsArabic
-                ? Locale('ar', '')
-                : Locale('en', ''),
+            locale: AppCubit.get(context).isArabic
+                ? const Locale('ar', '')
+                : const Locale('en', ''),
             theme: ThemeData(
               primaryColor: Colors.black,
               canvasColor: Colors.black,
@@ -76,10 +76,10 @@ class MyApp extends StatelessWidget {
             themeMode:
                 AppCubit.get(context).isDark ? ThemeMode.dark : ThemeMode.light,
             home: AnimatedSplashScreen(
-              duration: 5000,
+              duration: 3000,
               splashTransition: SplashTransition.fadeTransition,
               nextScreen:
-                  onBoarding != true ? const OnBording() : const HomeScreen(),
+                  onBoarding != true ? const OnBoardingScreen() : const HomeScreen(),
               splash: const SplashScreen(),
               splashIconSize: 2000,
               backgroundColor: AppCubit.get(context).isDark

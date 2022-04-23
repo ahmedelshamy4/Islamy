@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:adhan/adhan.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quran_app/MainCubit/app_cubit.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -18,12 +17,8 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    final myCoordinates = Coordinates(30.033333, 31.233334);
-    final params = CalculationMethod.egyptian.getParameters();
-    params.madhab = Madhab.hanafi;
-    final prayerTimes = PrayerTimes.today(myCoordinates, params);
     List<String> titles = [
-      AppCubit.get(context).IsArabic ? 'القرآن  الكريم' : 'Quran',
+      AppCubit.get(context).isArabic ? 'القرآن  الكريم' : 'Quran',
       AppLocalizations.of(context)!.sala,
       AppLocalizations.of(context)!.qbla,
       AppLocalizations.of(context)!.sebha,
@@ -47,7 +42,10 @@ class _HomeScreenState extends State<HomeScreen> {
                 Scaffold(
                   floatingActionButton: FloatingActionButton(
                     onPressed: AppCubit.get(context).changeListPattern,
-                    child: const Icon(Icons.wifi_protected_setup_outlined),
+                    child: const Icon(
+                      Icons.wifi_protected_setup_outlined,
+                      color: Color.fromARGB(255, 134, 48, 177),
+                    ),
                   ),
                   backgroundColor: AppCubit.get(context).isDark
                       ? Colors.transparent
@@ -60,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       onPressed: () {
                         showCupertinoDialog(
                           context: context,
-                          builder: LanguageDialog,
+                          builder: _languageDialog,
                         );
                       },
                       icon: Icon(
@@ -77,10 +75,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           setState(() {
                             AppCubit.get(context).changeTheme(null);
                           });
-                          print(AppCubit.get(context).isDark);
                         },
                         icon: ImageIcon(
-                          AssetImage('assets/images/paintbrush.png'),
+                          const AssetImage('assets/images/paintbrush.png'),
                           color: AppCubit.get(context).isDark
                               ? Colors.white
                               : Colors.black,
@@ -113,9 +110,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         ? const Color.fromARGB(255, 22, 31, 87)
                         : Colors.white,
                     unselectedIconTheme: IconThemeData(
-                        color: AppCubit.get(context).isDark
-                            ? Colors.white
-                            : Colors.black),
+                      color: AppCubit.get(context).isDark
+                          ? Colors.white
+                          : Colors.black,
+                    ),
                     selectedIconTheme:
                         const IconThemeData(color: Colors.purple),
                     iconSize: 500,
@@ -180,24 +178,24 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget LanguageDialog(BuildContext context) => CupertinoAlertDialog(
+  Widget _languageDialog(BuildContext context) => CupertinoAlertDialog(
         title: Text(
-          AppCubit.get(context).IsArabic
+          AppCubit.get(context).isArabic
               ? "اللغة ستتغير للإنجليزية !"
               : "The language will change to Arabic !",
           style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
         ),
         actions: [
           CupertinoDialogAction(
-            child: Text(AppCubit.get(context).IsArabic ? "لا" : "no"),
+            child: Text(AppCubit.get(context).isArabic ? "لا" : "no"),
             onPressed: () {
               Navigator.pop(context);
             },
           ),
           CupertinoDialogAction(
-            child: Text(AppCubit.get(context).IsArabic ? "أجل" : "yes"),
+            child: Text(AppCubit.get(context).isArabic ? "أجل" : "yes"),
             onPressed: () {
-              AppCubit.get(context).ChangeLocale(null);
+              AppCubit.get(context).changeLocale(null);
               Navigator.pop(context);
             },
           )

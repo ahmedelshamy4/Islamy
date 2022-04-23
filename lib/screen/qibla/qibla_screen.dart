@@ -5,6 +5,8 @@ import 'package:quran_app/screen/Qibla/qibla_compass.dart';
 class QiblaScreen extends StatelessWidget {
   final _deviceSupport = FlutterQiblah.androidDeviceSensorSupport();
 
+   QiblaScreen({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(

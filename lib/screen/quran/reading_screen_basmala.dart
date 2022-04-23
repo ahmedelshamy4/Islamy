@@ -6,7 +6,7 @@ import 'package:quran_app/screen/Quran/surahItem.dart';
 import '../../MainCubit/app_cubit.dart';
 
 class ReadingScreenNoBasmala extends StatelessWidget {
-  List<verssModel> list;
+  List<VerssModel> list;
   bool lastSura = false;
   ReadingScreenNoBasmala({Key? key, required this.list, required this.lastSura})
       : super(key: key);
@@ -19,7 +19,7 @@ class ReadingScreenNoBasmala extends StatelessWidget {
         cacheHelper.getdata(key: 'suraID');
     lastSura
         ? WidgetsBinding.instance!.addPostFrameCallback(
-            (_) => AppCubit.get(context).GoToLastAyaIndex())
+            (_) => AppCubit.get(context).goToLastAyaIndex())
         : () {};
     return Scaffold(
       body: Stack(alignment: Alignment.center, children: [
@@ -58,7 +58,7 @@ class ReadingScreenNoBasmala extends StatelessWidget {
   }
 }
 
-Widget buildReadingScreen(context, List<verssModel> list) {
+Widget buildReadingScreen(context, List<VerssModel> list) {
   return Padding(
     padding: const EdgeInsets.only(right: 12, left: 12, bottom: 15),
     child: ListView.builder(

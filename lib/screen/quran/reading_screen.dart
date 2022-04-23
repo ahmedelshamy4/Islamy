@@ -6,7 +6,7 @@ import 'package:quran_app/helper/cach_helper.dart';
 import '../../MainCubit/app_cubit.dart';
 
 class ReadingScreen extends StatefulWidget {
-  List<verssModel> list;
+  List<VerssModel> list;
   bool lastSura = false;
 
   ReadingScreen({Key? key, required this.list, required this.lastSura})
@@ -27,7 +27,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
         cacheHelper.getdata(key: 'suraID');
     widget.lastSura
         ? WidgetsBinding.instance!.addPostFrameCallback(
-            (_) => AppCubit.get(context).GoToLastAyaIndex())
+            (_) => AppCubit.get(context).goToLastAyaIndex())
         : () {
             print('');
           };
@@ -78,7 +78,7 @@ class _ReadingScreenState extends State<ReadingScreen> {
                       padding: const EdgeInsets.only(
                           right: 12, left: 12, bottom: 15),
                       child: ListView.builder(
-                        controller: AppCubit.get(context).Scrollcontroller,
+                        controller: AppCubit.get(context).scrollController,
                         physics: const BouncingScrollPhysics(),
                         itemCount: widget.list.length,
                         itemBuilder: (context, index) {
@@ -98,10 +98,13 @@ class _ReadingScreenState extends State<ReadingScreen> {
                     ),
                   ),
                   FloatingActionButton(
-                      child: const Icon(Icons.save),
+                      child: const Icon(
+                        Icons.save,
+                        color: Color.fromARGB(255, 134, 48, 177),
+                      ),
                       onPressed: () {
                         suraOffset =
-                            AppCubit.get(context).Scrollcontroller.offset;
+                            AppCubit.get(context).scrollController.offset;
                         cacheHelper.saveData(
                             key: 'lastverss', value: suraOffset);
                       })

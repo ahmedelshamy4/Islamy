@@ -3,7 +3,7 @@ import 'package:quran_app/screen/Quran/surahItem.dart';
 
 Widget readingItem(
   Color color,
-  List<verssModel> list,
+  List<VerssModel> list,
   index,
 ) {
   return Padding(

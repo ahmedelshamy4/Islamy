@@ -6,9 +6,7 @@ import 'package:quran_app/MainCubit/app_cubit.dart';
 import 'package:quran_app/screen/Quran/reading_screen.dart';
 import 'package:quran_app/screen/Quran/reading_screen_basmala.dart';
 import 'package:quran_app/screen/Quran/surahItem.dart';
-
 import '../../MainCubit/app_cubit_states.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class QuranScreen extends StatelessWidget {
 
@@ -20,14 +18,14 @@ class QuranScreen extends StatelessWidget {
           children: [
             InkWell(
               onTap: () {
-                List<verssModel> list = [];
+                List<VerssModel> list = [];
                 for (int i = 1;
                     i <
                         quran.getVerseCount(
                                 AppCubit.get(context).currentSurahNumber) +
                             1;
                     i++) {
-                  verssModel v = verssModel(
+                  VerssModel v = VerssModel(
                       quran.getVerse(
                           AppCubit.get(context).currentSurahNumber, i),
                       i);
@@ -65,7 +63,7 @@ class QuranScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(15),
                         child: Image(
                           image: AssetImage(
-                            AppCubit.get(context).IsArabic
+                            AppCubit.get(context).isArabic
                                 ? 'assets/images/lastread_flipped.png'
                                 : 'assets/images/lastread.png',
                           ),
@@ -97,7 +95,7 @@ class QuranScreen extends StatelessWidget {
                                         color: Colors.white,
                                         fontFamily: 'myFont',
                                         fontWeight:
-                                            AppCubit.get(context).IsArabic
+                                            AppCubit.get(context).isArabic
                                                 ? FontWeight.w800
                                                 : FontWeight.bold,
                                         fontSize: 20),
@@ -106,7 +104,7 @@ class QuranScreen extends StatelessWidget {
                               ],
                             ),
                             SizedBox(
-                              height: AppCubit.get(context).IsArabic
+                              height: AppCubit.get(context).isArabic
                                   ? MediaQuery.of(context).size.height * 0.01
                                   : MediaQuery.of(context).size.height * 0.01,
                             ),
@@ -115,7 +113,7 @@ class QuranScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(GetlastRead(context).toUpperCase(),
+                                  Text(getLastRead(context).toUpperCase(),
                                       style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.w800,
@@ -126,10 +124,10 @@ class QuranScreen extends StatelessWidget {
                                     style: TextStyle(
                                       color: Colors.white,
                                       fontWeight: FontWeight.w700,
-                                      fontFamily: AppCubit.get(context).IsArabic
+                                      fontFamily: AppCubit.get(context).isArabic
                                           ? 'myFont'
                                           : '',
-                                      fontSize: AppCubit.get(context).IsArabic
+                                      fontSize: AppCubit.get(context).isArabic
                                           ? 16
                                           : 15,
                                     ),
@@ -153,14 +151,14 @@ class QuranScreen extends StatelessWidget {
     );
   }
 
-  Widget buildQuranScreen(context, juzaPattern) {
-    if (juzaPattern == true) {
+  Widget buildQuranScreen(context, juzPattern) {
+    if (juzPattern == true) {
       return Expanded(
           child: ListView.separated(
         physics: const BouncingScrollPhysics(),
         itemCount: quran.totalJuzCount,
         itemBuilder: (context, index) {
-          return JuzaItem(context, index);
+          return JuzItem(context, index);
         },
         separatorBuilder: (context, index) {
           return Padding(
@@ -195,7 +193,7 @@ class QuranScreen extends StatelessWidget {
   }
 }
 
-String GetlastRead(context) {
+String getLastRead(context) {
   if (AppCubit.get(context).currentSurahName == null) {
     return 'الفاتحة';
   } else {

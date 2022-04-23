@@ -2,38 +2,40 @@ import 'package:flutter/material.dart';
 import 'package:quran_app/helper/cach_helper.dart';
 import 'package:quran_app/screen/Home/home_screen.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-class boardingModel {
+class BoardingModel {
   final String image, title, body;
 
-  boardingModel({
+  BoardingModel({
     required this.body,
     required this.image,
     required this.title,
   });
 }
 
-class OnBording extends StatefulWidget {
-  const OnBording({Key? key}) : super(key: key);
+class OnBoardingScreen extends StatefulWidget {
+  const OnBoardingScreen({Key? key}) : super(key: key);
 
   @override
-  State<OnBording> createState() => _OnBordingState();
+  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
 }
 
-class _OnBordingState extends State<OnBording> {
+class _OnBoardingScreenState extends State<OnBoardingScreen> {
   var pageController = PageController();
-  List<boardingModel> boarding = [
-    boardingModel(
+
+  List<BoardingModel> model = [
+    BoardingModel(
       image: 'assets/images/icon.png',
       title: "القرآن",
       body: "استمتع بجميع سور القرآن الكريم كاملة",
     ),
-    boardingModel(
+    BoardingModel(
       image: 'assets/images/iconm.png',
       title: "مواعيد الصلاة",
       body: "تحديد مواعيد الصلاة في مدينتك",
     ),
-    boardingModel(
+    BoardingModel(
       image: 'assets/images/icons.png',
       title: "القبلة",
       body: "قم بتحديد القبلة و اقم صلاتك في اي مكان",
@@ -73,7 +75,7 @@ class _OnBordingState extends State<OnBording> {
             Expanded(
               child: PageView.builder(
                 onPageChanged: (index) {
-                  if (index == boarding.length - 1) {
+                  if (index == model.length - 1) {
                     setState(() {
                       isLast = true;
                     });
@@ -86,33 +88,32 @@ class _OnBordingState extends State<OnBording> {
                 controller: pageController,
                 itemCount: 3,
                 physics: const PageScrollPhysics(),
-                itemBuilder: (context, i) => BuildBordingItem(boarding[i]),
+                itemBuilder: (context, i) => _buildBoardingItem(model[i]),
               ),
             ),
-            SizedBox(
-              height: 40,
-            ),
+            const SizedBox(height: 40),
             Row(
               children: [
                 SmoothPageIndicator(
                   controller: pageController,
-                  count: boarding.length,
+                  count: model.length,
                   effect: const ExpandingDotsEffect(
-                      dotColor: Colors.grey,
-                      dotHeight: 10,
-                      dotWidth: 10,
-                      spacing: 5.0,
-                      expansionFactor: 4.0,
-                      activeDotColor: Colors.white),
+                    dotColor: Colors.grey,
+                    dotHeight: 10,
+                    dotWidth: 10,
+                    spacing: 5.0,
+                    expansionFactor: 4.0,
+                    activeDotColor: Colors.white,
+                  ),
                 ),
-                Spacer(),
+                const Spacer(),
                 FloatingActionButton(
                   onPressed: () {
                     isLast
                         ? submit()
                         : pageController.nextPage(
-                        duration: const Duration(milliseconds: 1000),
-                        curve: Curves.ease);
+                            duration: const Duration(milliseconds: 1000),
+                            curve: Curves.ease);
                   },
                   child: const Icon(
                     Icons.arrow_forward_ios,
@@ -128,7 +129,7 @@ class _OnBordingState extends State<OnBording> {
     );
   }
 
-  Widget BuildBordingItem(boardingModel model) => Column(
+  Widget _buildBoardingItem(BoardingModel model) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(

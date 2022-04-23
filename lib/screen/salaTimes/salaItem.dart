@@ -2,11 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 Widget salaItem(
-  context,
-  String Estring,
-  String Tstring,
-  String Astring,
-) {
+    {required context,
+    required String Enstring,
+    required String Tstring,
+    required String Arstring}) {
   return SingleChildScrollView(
     child: SizedBox(
       width: double.infinity,
@@ -37,7 +36,7 @@ Widget salaItem(
                       borderRadius: BorderRadius.circular(8)),
                 ),
                 Text(
-                  Estring,
+                  Enstring,
                   textDirection: TextDirection.ltr,
                   style: TextStyle(
                       fontFamily: 'myFont',
@@ -82,7 +81,7 @@ Widget salaItem(
                     width: MediaQuery.of(context).size.width * 0.335,
                     child: Center(
                       child: Text(
-                        Astring,
+                        Arstring,
                         textDirection: TextDirection.rtl,
                         style: TextStyle(
                             fontFamily: 'myFont',
