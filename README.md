@@ -31,5 +31,12 @@ shared_preferences:
 geolocator: Geolocation plugin for Flutter. This plugin provides a cross-platform (iOS, Android) API for generic location (GPS etc.) functions.
   adhan:Adhan for Dart / Muslim Prayer Times Library. Now retrieving Prayer time in Dart easier than ever.
    
-![splash](ht![boradring](https://user-images.githubusercontent.com/26741217/164883815-a4153608-dd5a-4844-b55f-83bdeb29eaf2.jpeg)
-tps://user-images.githubusercontent.com/26741217/164883796-d2516623-551b-444e-9435-04b209638d97.jpeg)
+![splash![boradring](https://user-images.githubusercontent.com/26741217/164883848-88687ab2-a3b4-42b3-82ec-85b90b6219e4.jpeg)
+](ht![boradring](https://user-images.githubusercontent.com/26741217/164883815-a4153608-dd5a-4844-b55f-83bdeb29eaf2.jpeg)
+
+![quran](https://user-images.githubusercontent.com/26741217/164883877-66d18df2-0cb9-4f76-bd9c-e86e89e5f2d1.jpeg)
+
+![pary_time](https://user-images.githubusercontent.com/26741217/164883891-c45ca31c-2f08-4b68-862e-d4b59a56d82c.jpeg)
+![qibla](https://user-images.githubusercontent.com/26741217/164883895-a6e86621-c371-4293-802d-c289e5f51511.jpeg)
+![sebha](https://user-images.githubusercontent.com/26741217/164883899-48425634-53da-412a-be8d-67f1d095248c.jpeg)
+
