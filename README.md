@@ -33,10 +33,8 @@ geolocator: Geolocation plugin for Flutter. This plugin provides a cross-platfor
    
 ![splash![boradring](https://user-images.githubusercontent.com/26741217/164883848-88687ab2-a3b4-42b3-82ec-85b90b6219e4.jpeg)
 ![bording](https://user-images.githubusercontent.com/26741217/164883962-e7132a01-cb43-4a02-a214-d64420bab8a3.jpeg)
-
-
-![quran](https://user-images.githubusercontent.com/26741217/164883877-66d18df2-0cb9-4f76-bd9c-e86e89e5f2d1.jpeg)
-
+![quran](https://user-images.githubusercontent.com/26741217/164884010-1e7d5342-c0fc-4463-9502-1e4c0e07d6e7.jpeg)
+![juz](https://user-images.githubusercontent.com/26741217/164884011-11b0f2df-ed17-43ff-923b-41a5c65f966e.jpeg)
 ![pary_time](https://user-images.githubusercontent.com/26741217/164883891-c45ca31c-2f08-4b68-862e-d4b59a56d82c.jpeg)
 ![qibla](https://user-images.githubusercontent.com/26741217/164883895-a6e86621-c371-4293-802d-c289e5f51511.jpeg)
 ![sebha](https://user-images.githubusercontent.com/26741217/164883899-48425634-53da-412a-be8d-67f1d095248c.jpeg)
